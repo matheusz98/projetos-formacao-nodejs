@@ -5,20 +5,7 @@ app.set("view engine", "ejs");
 app.use(express.static('public'));
 
 app.get("/", (req, res) => {
-    const nome = "Matheus";
-    const linguagem = "JavaScript";
-    const exibirMsg = true;
-    const produtos = [
-        {nome: "Cheetos", preco: 3.14},
-        {nome: "Monster", preco: 7},
-        {nome: "Fanta Laranja", preco: 4},
-    ];
-    res.render("index", {
-        nome: nome,
-        linguagem: linguagem,
-        msg: exibirMsg,
-        produtos: produtos,
-    });
+    res.render("index");
 });
 
 app.listen(8080, () => {
