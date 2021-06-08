@@ -4,7 +4,12 @@ const app = express();
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-    res.render("index");
+    const nome = "Matheus";
+    const linguagem = "JavaScript";
+    res.render("index", {
+        nome: nome,
+        linguagem: linguagem,
+    });
 });
 
 app.listen(8080, () => {
