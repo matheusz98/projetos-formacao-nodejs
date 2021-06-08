@@ -6,9 +6,11 @@ app.set("view engine", "ejs");
 app.get("/", (req, res) => {
     const nome = "Matheus";
     const linguagem = "JavaScript";
+    const exibirMsg = true;
     res.render("index", {
         nome: nome,
         linguagem: linguagem,
+        msg: exibirMsg
     });
 });
 
