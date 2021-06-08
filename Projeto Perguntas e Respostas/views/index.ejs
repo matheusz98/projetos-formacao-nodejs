@@ -18,5 +18,11 @@
         <h2>O bloco é verdadeiro</h2>
     <% } %>
 
+    <% produtos.forEach(function(produto) { %>
+        <hr>
+        <%= produto.nome %>
+        <%= produto.preco %>
+    <% }) %>
+
 </body>
 </html>
