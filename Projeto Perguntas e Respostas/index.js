@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const connection = require('./database/database');
-const perguntaModel = require('./database/Pergunta');
+const Pergunta = require('./database/Pergunta');
 
 connection
     .authenticate()
@@ -28,7 +28,12 @@ app.get("/perguntar", (req, res) => {
 app.post("/salvarpergunta", (req, res) => {
     const titulo = req.body.titulo;
     const descricao = req.body.descricao;
-    res.send(`Formulário recebido com sucesso! ${titulo} ${descricao}`);
+    Pergunta.create({
+        titulo: titulo,
+        descricao: descricao
+    }).then(() => {
+        res.redirect("/");
+    });
 });
 
 app.listen(8080, () => {
