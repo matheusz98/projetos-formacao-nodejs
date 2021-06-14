@@ -1,0 +1,19 @@
+<%- include('../../includes/header') %>
+<%- include('../../includes/navbar') %>
+
+<div class="container">
+    <br>
+    <div class="card">
+        <h2>Edição de categorias</h2>
+    </div>
+
+    <div class="card-body">
+        <form method="post" action="/categories/save">
+            <input type="text" class="form-control" name="title" placeholder="Título da categoria" value="<%= category.title %>">
+            <br>
+            <button class="btn btn-primary">Atualizar</button>
+        </form>
+    </div>
+</div>
+
+<%- include('../../includes/footer') %>
