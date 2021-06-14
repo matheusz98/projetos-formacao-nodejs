@@ -1,5 +1,30 @@
 <%- include('includes/header') %>
+<%- include('includes/homenavbar') %>
+
 <body>
-    <h1>Hello World!</h1>
+    <div class="container">
+        <hr>
+        <div class="jumbotron">
+            <h2 class="display-4">Bem-vindo!</h2>
+            <p class="lead">Este é um blog aleatório para aprendizado.</p>
+            <hr>
+            <p>Descrição bem daora</p>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Leia mais</a>
+        </div>
+        <br>
+
+        <% articles.forEach(article => { %>
+            <div class="card">
+                <div class="card-header">
+                    <h2><%= article.title %></h2>
+                </div>
+
+                <div class="card-body">
+                    <a href="#" class="btn btn-success">Ler artigo</a>
+                </div>
+            </div>
+        <% }) %>
+    </div>
 </body>
+
 <%- include('includes/footer') %>
