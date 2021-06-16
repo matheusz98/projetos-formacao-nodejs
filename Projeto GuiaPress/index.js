@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const connection = require('./database/database');
+
 const categoriesController = require('./categories/CategoriesController.js');
 const articlesController = require('./articles/ArticlesController.js');
 const usersController = require('./user/UsersController');
@@ -13,7 +14,7 @@ const User = require('./user/User');
 app.set('view engine', 'ejs');
 
 app.use(session({
-    secret: 'd8fg6s1s6g4a654g984e1fc63afgdlvfmfrkjs', cookie: { maxAge: 300000000 }
+    secret: 'd8fg6s1s6g4a654g984e1fc63afgdlvfmfrkjs', cookie: { maxAge: 30000000 }
 }));
 
 app.use(express.static('public'));
