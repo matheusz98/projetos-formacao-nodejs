@@ -9,7 +9,8 @@ async function main() {
     const processData = Processor.Process(data);
     const users = new Table(processData);
 
-    console.log(users.rows);
+    console.log(users.RowCount);
+    console.log(users.ColumnCount);
 }
 
 main();
