@@ -29,8 +29,9 @@ const DB = {
     ]
 }
 
-app.get('/', () => {
-
+app.get('/games', (req, res) => {
+    res.statusCode = 200;
+    res.json(DB.games);
 });
 
 app.listen(3000, () => {
