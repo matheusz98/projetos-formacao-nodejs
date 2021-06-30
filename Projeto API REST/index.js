@@ -51,6 +51,19 @@ app.get('/game/:id', (req, res) => {
     }
 });
 
+app.post('/game', (req, res) => {
+    const { title, price, year } = req.body;
+
+    DB.games.push({
+        id: 4,
+        title,
+        price,
+        year
+    });
+
+    res.sendStatus(200);
+});
+
 app.listen(3000, () => {
     console.log('Servidor inicializado com sucesso!');
 })
