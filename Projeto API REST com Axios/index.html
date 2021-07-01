@@ -17,6 +17,13 @@
     <input type="number" name="year" id="year" placeholder="Ano"><br>
     <input type="number" name="price" id="price" placeholder="Preço"><br>
     <button type="button" onclick="createGame()">Criar</button>
+    <hr>
+    <h4>Editar game</h4>
+    <input type="text" name="idEdit" id="idEdit" placeholder="ID" readonly><br>
+    <input type="text" name="titleEdit" id="titleEdit" placeholder="Título"><br>
+    <input type="number" name="yearEdit" id="yearEdit" placeholder="Ano"><br>
+    <input type="number" name="priceEdit" id="priceEdit" placeholder="Preço"><br>
+    <button type="button" onclick="updateGame()">Editar</button>
     
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
@@ -51,6 +58,40 @@
             });
         }
 
+        function loadForm(listItem) {
+            const id = listItem.getAttribute('data-id');
+            const title = listItem.getAttribute('data-title');
+            const year = listItem.getAttribute('data-year');
+            const price = listItem.getAttribute('data-price');
+            document.querySelector('#idEdit').value = id;
+            document.querySelector('#titleEdit').value = title;
+            document.querySelector('#yearEdit').value = year;
+            document.querySelector('#priceEdit').value = price;
+        }
+
+        function updateGame() {
+            const idInput = document.querySelector('#idEdit')
+            const titleInput = document.querySelector('#titleEdit');
+            const yearInput = document.querySelector('#yearEdit');
+            const priceInput = document.querySelector('#priceEdit');
+
+            const game = {
+                title: titleInput.value,
+                year: yearInput.value,
+                price: priceInput.value
+            }
+        
+            const id = idInput.value;
+
+            axios.put('http://localhost:3000/game/' + id, game).then(res => {
+                if(res.status == 200) {
+                    alert('Game atualizado com sucesso!');
+                }
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+
         axios.get('http://localhost:3000/games').then(res => {
             const games = res.data;
             const list = document.querySelector('#games');
@@ -71,7 +112,14 @@
                     deleteGame(item);
                 });
 
+                const editBtn = document.createElement('button');
+                editBtn.innerHTML = 'Editar';
+                editBtn.addEventListener('click', () => {
+                    loadForm(item);
+                });
+
                 item.appendChild(deleteBtn);
+                item.appendChild(editBtn);
 
                 list.appendChild(item);
             });
