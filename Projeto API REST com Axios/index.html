@@ -44,7 +44,11 @@
 
         function deleteGame(listItem) {
             const id = listItem.getAttribute('data-id');
-            console.log(id);
+            axios.delete('http://localhost:3000/game/' + id).then(res => {
+                alert('Game deletado com sucesso!');
+            }).catch(error => {
+                console.log(error);
+            });
         }
 
         axios.get('http://localhost:3000/games').then(res => {
@@ -59,7 +63,7 @@
                 item.setAttribute('data-year', game.year);
                 item.setAttribute('data-price', game.price);
 
-                item.innerHTML = `${game.id} - ${game.title} - ${game.year} - ${game.price}$`;
+                item.innerHTML = `${game.id} - ${game.title} - ${game.year} - ${game.price}$ `;
 
                 const deleteBtn = document.createElement('button');
                 deleteBtn.innerHTML = 'Deletar';
