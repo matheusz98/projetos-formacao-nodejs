@@ -48,6 +48,12 @@
 
             games.forEach(game => {
                 const item = document.createElement('li');
+
+                item.setAttribute('data-id', game.id);
+                item.setAttribute('data-title', game.title);
+                item.setAttribute('data-year', game.year);
+                item.setAttribute('data-price', game.price);
+
                 item.innerHTML = `${game.id} - ${game.title} - ${game.year} - ${game.price}$`;
                 list.appendChild(item);
             });
