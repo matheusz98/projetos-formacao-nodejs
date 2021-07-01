@@ -9,6 +9,29 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+function auth(req, res, next) {
+    const authToken = req.headers['authorization'];
+    
+    if(authToken != undefined) {
+        const bearer = authToken.split(' ');
+        const token = bearer[1];
+
+        jwt.verify(token, JWTSecret, (error, data) => {
+            if(error) {
+                res.status(401);
+                res.json({ error: 'Token inválido!'});
+            } else {
+                req.token = token;
+                req.loggedUser = { id: data.id, email: data.email};
+                next();
+            }
+        });
+    } else {
+        res.status(401);
+        res.json({ error: 'Token inválido!'});
+    }
+}
+
 const DB = {
     games: [
         { 
@@ -49,12 +72,12 @@ const DB = {
     ]
 }
 
-app.get('/games', (req, res) => {
+app.get('/games', auth, (req, res) => {
     res.statusCode = 200;
-    res.json(DB.games);
+    res.json({ user: req.loggedUser, games: DB.games });
 });
 
-app.get('/game/:id', (req, res) => {
+app.get('/game/:id', auth, (req, res) => {
     if(isNaN(req.params.id)) {
         res.sendStatus(400);
     } else {
@@ -71,7 +94,7 @@ app.get('/game/:id', (req, res) => {
     }
 });
 
-app.post('/game', (req, res) => {
+app.post('/game', auth, (req, res) => {
     const { title, price, year } = req.body;
 
     DB.games.push({
@@ -84,7 +107,7 @@ app.post('/game', (req, res) => {
     res.sendStatus(200);
 });
 
-app.delete('/game/:id', (req, res) => {
+app.delete('/game/:id', auth, (req, res) => {
     if(isNaN(req.params.id)) {
         res.sendStatus(400);
     } else {
@@ -100,7 +123,7 @@ app.delete('/game/:id', (req, res) => {
     }
 });
 
-app.put('/game/:id', (req, res) => {
+app.put('/game/:id', auth, (req, res) => {
     if(isNaN(req.params.id)) {
         res.sendStatus(400);
     } else {
@@ -130,7 +153,7 @@ app.put('/game/:id', (req, res) => {
     }
 });
 
-app.post('/auth', (req, res) => {
+app.post('/auth', auth, (req, res) => {
     const { email, password } = req.body;
 
     if(email != undefined) {
