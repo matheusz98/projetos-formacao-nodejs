@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
+
+const JWTSecret = 'asjaoije498dsaw894ca651w8ADSFSETHJ15098';
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -135,8 +138,15 @@ app.post('/auth', (req, res) => {
 
         if(user != undefined) {
             if(user.password == password) {
-                res.status(200)
-                res.json({ token: 'Token falso!'});
+                jwt.sign({ id: user.id, email: user.email }, JWTSecret, { expiresIn: '48h'}, (error, token) => {
+                    if(error) {
+                        res.status(400);
+                        res.json({ error: 'Falha interna'});
+                    } else {
+                        res.status(200);
+                        res.json({ token: token });
+                    }
+                });
             } else {
                 res.status(401)
                 res.json({ error: 'Credenciais inválidas!'});
