@@ -33,6 +33,12 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
 
+        const axiosConfig = {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token')
+            }
+        }
+
         function login() {
             const emailField = document.querySelector('#email');
             const passwordField = document.querySelector('#password');
@@ -45,16 +51,11 @@
                 password
             }).then(res => {
                 const token = res.data.token;
-                alert('Login efetuado com sucesso!');
+                localStorage.setItem('token', token);
+                axiosConfig.headers.Authorization = 'Bearer' + localStorage.getItem('token');
             }).catch(err => {
                 alert('Credenciais inválidas!');
             });
-        }
-
-        const axiosConfig = {
-            headers: {
-                Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJtYXRoZXVzQGdtYWlsLmNvbSIsImlhdCI6MTYyNTE4NDM1MCwiZXhwIjoxNjI1MzU3MTUwfQ.VIGa2kzpdPblOgQftjoKCzp1aBmwoneNAKdgCtH9s2g'
-            }
         }
 
         function createGame() {
@@ -69,7 +70,7 @@
             }
         
 
-            axios.post('http://localhost:3000/game', game).then(res => {
+            axios.post('http://localhost:3000/game', game, axiosConfig).then(res => {
                 if(res.status == 200) {
                     alert('Game cadastrado com sucesso!');
                 }
@@ -80,7 +81,7 @@
 
         function deleteGame(listItem) {
             const id = listItem.getAttribute('data-id');
-            axios.delete('http://localhost:3000/game/' + id).then(res => {
+            axios.delete('http://localhost:3000/game/' + id, axiosConfig).then(res => {
                 alert('Game deletado com sucesso!');
             }).catch(error => {
                 console.log(error);
@@ -112,7 +113,7 @@
         
             const id = idInput.value;
 
-            axios.put('http://localhost:3000/game/' + id, game).then(res => {
+            axios.put('http://localhost:3000/game/' + id, game, axiosConfig).then(res => {
                 if(res.status == 200) {
                     alert('Game atualizado com sucesso!');
                 }
