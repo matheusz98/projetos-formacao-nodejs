@@ -8,6 +8,11 @@
 </head>
 <body>
 
+    <h2>Login</h2>
+    <input type="email" name="email" id="email" placeholder="email@gmail.com"><br>
+    <input type="password" name="password" id="password" placeholder="**********">
+    <button onclick="login()">Entrar</button>
+
     <hr>
     <h4>Lista de games</h4>
     <ul id="games"></ul>
@@ -28,9 +33,27 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
 
+        function login() {
+            const emailField = document.querySelector('#email');
+            const passwordField = document.querySelector('#password');
+            
+            const email = emailField.value;
+            const password = passwordField.value;
+
+            axios.post('http://localhost:3000/auth', {
+                email,
+                password
+            }).then(res => {
+                const token = res.data.token;
+                alert('Login efetuado com sucesso!');
+            }).catch(err => {
+                alert('Credenciais inválidas!');
+            });
+        }
+
         const axiosConfig = {
             headers: {
-                Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJtYXRoZXVzQGdtYWlsLmNvbSIsImlhdCI6MTYyNTE3OTkxOSwiZXhwIjoxNjI1MzUyNzE5fQ.7wzZkpmX23TO7wP2iCFoJdwrRkdnRsCVT4xNTuIXgy8'
+                Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJtYXRoZXVzQGdtYWlsLmNvbSIsImlhdCI6MTYyNTE4NDM1MCwiZXhwIjoxNjI1MzU3MTUwfQ.VIGa2kzpdPblOgQftjoKCzp1aBmwoneNAKdgCtH9s2g'
             }
         }
 
