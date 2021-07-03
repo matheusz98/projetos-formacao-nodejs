@@ -21,7 +21,15 @@ app.use(session({
 app.use(flash());
 
 app.get('/', (req, res) => {
-    res.render('index');
+    let emailError = req.flash('emailError');
+    let nameError = req.flash('nameError');
+    let pontosError = req.flash('pontosError');
+    let email = req.flash('email');
+
+    emailError = (emailError == undefined || emailError.length == 0) ? undefined : emailError;
+    email = (email == undefined || email.length == 0) ? '' : email;
+
+    res.render('index', { emailError, nameError, pontosError, email: email });
 });
 
 app.post('/form', (req, res) => {
@@ -48,6 +56,11 @@ app.post('/form', (req, res) => {
     }
 
     if(emailError != undefined || pontosError != undefined || nameError != undefined) {
+        req.flash('emailError', emailError);
+        req.flash('nameError', nameError);
+        req.flash('pontosError', pontosError);
+        req.flash('email', email);
+
         res.redirect('/');
     } else {
         res.send('Funfou!');
