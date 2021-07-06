@@ -56,3 +56,22 @@ database.insert({nome: 'Persona 5 Royal', preco: 35}).into('games').then(data =>
     console.log(err);
 });
 */
+
+/* SELECT
+database.select()
+    .whereRaw("nome = 'Death Stranding'")
+    .table('games').then(data => {
+        console.log(data);
+    }).catch(err => {
+        console.log(err);
+    });
+
+Com operações like, !=, >, 
+database.select(['id', 'nome'])
+    .whereRaw('preco > 50')
+    .table('games').then(data => {
+        console.log(data);
+    }).catch(err => {
+        console.log(err);
+    });
+<*/
