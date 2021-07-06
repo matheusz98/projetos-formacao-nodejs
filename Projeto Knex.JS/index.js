@@ -22,10 +22,37 @@ const dados = [
         preco: 40
     }
 ]
-*/
 
 database.insert(dados).into('games').then(data => {
     console.log(data);
 }).catch(err => {
     console.log(err);
 });
+*/
+
+/* SELECT
+database.select().table('games').then(data => {
+    console.log(data);
+}).catch(err => {
+    console.log(err);
+});
+
+Caso quiser selecionar campos específicos
+database.select('id, preco').table('games').then(data => {
+    console.log(data);
+}).catch(err => {
+    console.log(err);
+});
+*/
+
+/* Inserindo dados e selecionando (Nested Queries)
+database.insert({nome: 'Persona 5 Royal', preco: 35}).into('games').then(data => {
+    database.select(['id', 'preco']).table('games').then(data => {
+        console.log(data);
+    }).catch(err => {
+        console.log(err);
+    });
+}).catch(err => {
+    console.log(err);
+});
+*/
