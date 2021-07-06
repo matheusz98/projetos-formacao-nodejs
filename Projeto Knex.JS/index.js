@@ -91,3 +91,11 @@ database.where({ id: 1 }).update({ preco: 50}).table('games').then(data => {
     console.log(err);
 });
 */
+
+/* Order by
+database.select().table('games').orderBy('nome', 'asc').then(data => {
+    console.log(data);
+}).catch(err => {
+    console.log(err);
+});
+*/
