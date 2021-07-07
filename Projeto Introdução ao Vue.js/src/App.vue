@@ -1,11 +1,10 @@
 <template>
   <div id="app">
-    <input type="text" v-model='nomeMatheus'>
-    <Cliente :cliente='clienteMatheus'/>
-    <Cliente :nome='nomeMatheus'/>
-    <Cliente nome='Matheus Costa' email='email@gmail.com' idade='22' descricao='asaiuheab'/>
-    <Cliente nome='Jão' email='yjfsaf@gmail.com' idade='31' descricao='asajxaiohnr'/>
-    <Cliente nome='Pedruga' email='sfdsadf@gmail.com' idade='55' descricao='aoxjaoir'/>
+    <input type="text" v-model='clienteMatheus.nome'>
+    <input type="text" v-model='clienteMatheus.email'>
+    <Cliente :cliente='clienteMatheus' :showIdade='true'/>
+    <Cliente :cliente='clienteMatheus' :showIdade='false'/>
+    <Cliente :cliente='clienteMatheus' :showIdade='true'/>
   </div>
 </template>
 
