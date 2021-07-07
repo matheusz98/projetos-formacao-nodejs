@@ -1,5 +1,5 @@
 <template>
-    <div id="cliente">
+    <div :class="{ 'cliente': !isPremium, 'cliente-premium': isPremium }">
         <h4>Nome: {{ cliente.nome }}</h4>
         <p>Email: {{ cliente.email }}</p>
         <p v-if='showIdade === true'>Idade: {{ cliente.idade }}</p>
@@ -11,7 +11,7 @@
 export default {
     data() {
         return {
-
+            isPremium: true
         }
     },
     props: {
@@ -22,11 +22,16 @@ export default {
 </script>
 
 <style scoped>
-    #cliente {
+    .cliente {
         background: #ECE5E3;
         max-width: 600px;
         height: 250px;
         padding: 2rem;
         margin: 2rem;
+    }
+
+    .cliente-premium {
+        background: purple;
+        color: black;
     }
 </style>
