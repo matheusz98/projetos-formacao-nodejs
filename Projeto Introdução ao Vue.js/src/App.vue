@@ -1,10 +1,13 @@
 <template>
   <div id="app">
-    <input type="text" v-model='clienteMatheus.nome'>
-    <input type="text" v-model='clienteMatheus.email'>
-    <Cliente :cliente='clienteMatheus' :showIdade='true'/>
-    <Cliente :cliente='clienteMatheus' :showIdade='false'/>
-    <Cliente :cliente='clienteMatheus' :showIdade='true'/>
+    <div v-for='(cliente, index) in clientes' :key='cliente.id'>
+      <h4>{{ index }}</h4>
+      <Cliente :cliente='cliente'/>
+      <hr>
+      <h4>Edição de dados: </h4>
+      <input type="text" v-model='cliente.nome'>
+      <input type="text" v-model='cliente.email'>
+    </div>
   </div>
 </template>
 
@@ -20,7 +23,29 @@ export default {
         nome: 'Matheus Costa',
         email: 'matheus@gmail.com',
         idade: 22
-      }
+      },
+      clientes: [
+        {
+          id: 1,
+          nome: 'Matheus Costa',
+          email: 'matheus@gmail.com',
+          idade: 22
+        },
+
+        {
+          id: 2,
+          nome: 'Antônio Silva',
+          email: 'antoniosilva@gmail.com',
+          idade: 37
+        },
+
+        {
+          id: 3,
+          nome: 'Igor Ferreira',
+          email: 'igorferreira@gmail.com',
+          idade: 28
+        },
+      ]
     }
   },
   components: {
