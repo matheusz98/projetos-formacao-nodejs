@@ -9,7 +9,7 @@
     <hr>
     <div v-for='(cliente, index) in clientes' :key='cliente.id'>
       <h4>{{ index }}</h4>
-      <Cliente :cliente='cliente'/>
+      <Cliente :cliente='cliente' @meDelete='deletarUsuario'/>
       <hr>
     </div>
   </div>
@@ -51,6 +51,11 @@ export default {
         this.idadeField = 0;
         this.deuErro = false;
       }
+    },
+    deletarUsuario: function($event) {
+      const id = $event.idDoCliente;
+      const novoArray = this.clientes.filter(cliente => cliente.id != id);
+      this.clientes = novoArray;
     }
   }
 }
