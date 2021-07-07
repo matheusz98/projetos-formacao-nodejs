@@ -1,7 +1,7 @@
 <template>
     <div :class="{ 'cliente': !isPremium, 'cliente-premium': isPremium }">
         <h4>Nome: {{ cliente.nome }}</h4>
-        <p>Email: {{ cliente.email }}</p>
+        <p>Email: {{ cliente.email | processarEmail}}</p>
         <p v-if='showIdade === true'>Idade: {{ cliente.idade }}</p>
         <p v-else>O usuário escondeu a idade.</p>
         <button @click='mudarCor'>Mudar cor</button>
@@ -26,6 +26,11 @@ export default {
         },
         emitirEventoDelete: function() {
             this.$emit('meDelete', { idDoCliente: this.cliente.id, component: this});
+        }
+    },
+    filters: {
+        processarEmail: function(value) {
+            return value.toUpperCase();
         }
     }
 }
