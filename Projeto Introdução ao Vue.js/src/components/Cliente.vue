@@ -1,15 +1,24 @@
 <template>
     <div id="cliente">
-        <h2>Cliente</h2>
-        <h3>Lista de clientes</h3>
-        <h4>Cadastro de clientes</h4>
-        <h5>Alteração de clientes</h5>
+        <input type="text" v-model='nome'>
+        <hr>
+        <input type="text" v-model='descricao'>
+        <h2>{{ nome }}</h2>
+        <h3>Descrição: {{ descricao }}</h3>
     </div>
 </template>
 
 <script>
 export default {
-    
+    data() {
+        return {
+            nome: 'Matheus Costa',
+            numero: '',
+            email: '',
+            idade: 22,
+            descricao: 'Lorem ipsum'
+        }
+    }
 }
 </script>
 
@@ -17,7 +26,5 @@ export default {
     #cliente {
         max-width: 600px;
         height: 120px;
-        background: grey;
-        color: blue;
     }
 </style>
