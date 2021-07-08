@@ -15,7 +15,7 @@ const routes = [
     component: About
   },
   {
-    path: '/matheus',
+    path: '/matheus/:dado',
     name: 'Matheus',
     component: Cadastro
   }
