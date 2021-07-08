@@ -1,4 +1,4 @@
-# routerguia
+# pokedex
 
 ## Project setup
 ```
