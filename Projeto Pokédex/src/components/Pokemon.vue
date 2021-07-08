@@ -1,7 +1,23 @@
 <template>
-    <div>
-        <h1>{{ num }} {{ upper(name) }}</h1>
-        <small>{{ url }}</small>
+    <div id="pokemon">
+        <div class="card">
+            <div class="card-image">
+                <figure>
+                <img :src="pokemon.front" alt="Placeholder image">
+                </figure>
+            </div>
+            <div class="card-content">
+                <div class="media">
+                <div class="media-content">
+                    <p class="title is-4"> {{ num }} {{ upper(name) }} </p>
+                    <p class="subtitle is-6"> {{ upper(pokemon.type) }} </p>
+                </div>
+                </div>
+
+                <div class="content">
+                </div>
+            </div>
+            </div>
     </div>
 </template>
 
@@ -19,7 +35,11 @@ export default {
 
     data() {
         return {
-            pokemon: {}
+            pokemon: {
+                type: '',
+                front: '',
+                back: ''
+            }
         }
     },
 
@@ -39,5 +59,7 @@ export default {
 </script>
 
 <style>
-
+    #pokemon {
+        margin-top: 2rem;
+    }
 </style>
